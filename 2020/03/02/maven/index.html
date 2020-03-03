@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hexo</title>
+  <title>maven | Hexo</title>
   <meta name="keywords" content="">
-  <meta name="description" content="Hexo">
+  <meta name="description" content="maven | Hexo">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
@@ -48,7 +48,7 @@
 </div>
 
 <body>
-<aside class="nav mobile">
+<aside class="nav">
     <div class="nav-left">
         <a href="/" class="avatar_target">
     <img class="avatar" src="/img/avatar.jpg" />
@@ -281,12 +281,43 @@
         </div>
     </div>
 </aside>
-<div class="post index">
+<div class="post">
     <div class="pjax">
-        <article class="index">
-            <div class="toc-ref">
+        <article id="post-maven" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Why-Blog"><span class="toc-text">Why Blog</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#对博客的理解"><span class="toc-text">对博客的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关于叶落阁"><span class="toc-text">关于叶落阁</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博客平台"><span class="toc-text">博客平台</span></a></li></ol></li></ol>
+        <h1 class="article-title">maven</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        
+    </div>
+    <div class="article-meta">
+        
+        创建时间:<time class="date" title='更新时间: 2020-03-03 17:18:24'>2020-03-02 10:05</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读:<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Maven"><span class="toc-text">Maven</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven仓库的关系"><span class="toc-text">Maven仓库的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven项目结构"><span class="toc-text">Maven项目结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Maven常用命令"><span class="toc-text">Maven常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#maven生命周期"><span class="toc-text">maven生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#maven概念图模型"><span class="toc-text">maven概念图模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建maven项目"><span class="toc-text">创建maven项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#依赖作用范围"><span class="toc-text">依赖作用范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Error"><span class="toc-text">Error</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -299,36 +330,159 @@
     }
 </style>
 </div>
-            <h1 id="Why-Blog"><a href="#Why-Blog" class="headerlink" title="Why Blog"></a>Why Blog</h1><h2 id="对博客的理解"><a href="#对博客的理解" class="headerlink" title="对博客的理解"></a>对博客的理解</h2><p>喜欢写Blog的人，会经历三个阶段。</p>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h2><h3 id="Maven仓库的关系"><a href="#Maven仓库的关系" class="headerlink" title="Maven仓库的关系"></a>Maven仓库的关系</h3><ul>
+<li><p>配置maven工程时, maven首先会寻找系统盘的本地仓库, 若本地仓库(b2b)没有相关jar包, 会联网到中央仓库寻找jar包, 中央仓库(central)放置了几乎所有的开源jar包. 公司开发中, 还会有自己的远程仓库保存自己的jar包, 开发项目时, 可以往公司的远程仓库(私服)中提取jar包, 也可以往远程仓库中上传jar包, 如果公司的远程仓库也没有相关jar包, 也会从中央仓库中下载.</p>
+<p><img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171247.png" alt=""></p>
+</li>
+<li><p>本地仓库的路径</p>
+<p>本地仓库的默认路径可以在maven根目录下的config文件夹中setting.xml中找到</p>
 <blockquote>
-<p>第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</p>
+<p>/Users/kim/apache-maven-3.6.3/conf/settings.xml</p>
 </blockquote>
-<blockquote>
-<p>第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</p>
+<p>本地仓库的路径默认如下图, 比较难以管理</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171318.png" style="zoom:50%;" />
+
+<p>可以使用以下方法, 重新设定本地仓库路径</p>
+<img src="/Users/kim/Library/Application Support/typora-user-images/image-20200303171419732.png" alt="image-20200303171419732" style="zoom:50%;" />
+
+</li>
+</ul>
+<h3 id="Maven项目结构"><a href="#Maven项目结构" class="headerlink" title="Maven项目结构"></a>Maven项目结构</h3><blockquote>
+<p>scr/main/java目录 核心代码部分</p>
+<p>scr/main/resources 配置文件部分</p>
+<p>scr/test/java目录 测试代码部分</p>
+<p>scr/test/resources 测试配置文件</p>
+<p>scr/main/webapp 页面资源, js, css, 图片等资源</p>
 </blockquote>
-<blockquote>
-<p>第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</p>
-</blockquote>
-<p>我们每个人的在网络上产生的数据越来越多，这些信息是我们在互联网上存在过的痕迹，值得我们认真对待。但是它们被分散分布在各个网站上。很多时候我们很难将它们聚合在一起，而且各个网站的信息排布方式也没有办法自由控制，所以我们需要一个可以由自己主宰的空间——博客。</p>
-<p>通过博客，我们可以记录自己的生活和成长的轨迹。它不像 Twitter 那样碎片化，也不像 Facebook 那样关系化，它是私人的空间。</p>
-<h2 id="关于叶落阁"><a href="#关于叶落阁" class="headerlink" title="关于叶落阁"></a>关于叶落阁</h2><p><strong>叶落阁</strong> 是阿杰（杨玉杰）的个人站。</p>
-<p>到目前为止已经写了<code class="article_number"></code>篇文章， 共<code class="site_word_count"></code>字。</p>
-<p>本站访问人数：<code class="site_uv"></code>人次 ， 访问量：<code class="site_pv"></code>次</p>
-<h2 id="博客平台"><a href="#博客平台" class="headerlink" title="博客平台"></a>博客平台</h2><p>这个博客通过 <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> 生成，部署在 <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a>，主题 <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank" rel="noopener">3-hexo</a> 已经在github上开源</p>
-<p>主要功能：</p>
+<h3 id="Maven常用命令"><a href="#Maven常用命令" class="headerlink" title="Maven常用命令"></a>Maven常用命令</h3><ul>
+<li><p>mvn clean: 删除target目录, 清除项目编译信息</p>
+</li>
+<li><p>mvn compile: 编译src中main的代码</p>
+</li>
+<li><p>mvn test: 编译src中test的代码</p>
+</li>
+<li><p>mvn package: 把项目进行打包, 把编译后的main和test代码放到target目录中, 可以在pom.xml配置文件中设置输出包的类型</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171439.png" style="zoom:50%;" />
+</li>
+<li><p>mvn install: 在mvn package的基础上, 把包放到Maven的本地仓库中</p>
+</li>
+</ul>
+<h3 id="maven生命周期"><a href="#maven生命周期" class="headerlink" title="maven生命周期"></a>maven生命周期</h3><blockquote>
 <ul>
-<li>搜索支持文章标题、标签(#标签)、作者(@作者)</li>
-<li>pad/手机等移动端适配</li>
-<li>页面全局快捷键 <a href='http://yelog.org/2017/03/24/3-hexo-shortcuts/' target="_blank" rel="noopener">3-hexo快捷键说明</a></li>
+<li><p>默认生命周期: compile -&gt; test -&gt; package -&gt; install -&gt; deploy</p>
+</li>
+<li><p>清理生命周期: clean</p>
+</li>
+<li><p>每一个构建项目的命令都对应maven底层一个插件</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171506.png" style="zoom:50%;" />
+</li>
+</ul>
+</blockquote>
+<h3 id="maven概念图模型"><a href="#maven概念图模型" class="headerlink" title="maven概念图模型"></a>maven概念图模型</h3><blockquote>
+<p>pom.xml中含有:</p>
+<p>项目自身信息, </p>
+<p>项目运行所依赖的jar包, </p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171529.png" style="zoom:50%;" />
+
+<p>项目运行环境信息, 比如: jdk, Tomcat信息</p>
+</blockquote>
+<h3 id="创建maven项目"><a href="#创建maven项目" class="headerlink" title="创建maven项目"></a>创建maven项目</h3><ul>
+<li><p>idea配置maven</p>
+<blockquote>
+<ol>
+<li>找到maven配置</li>
+<li>填入maven所在根目录</li>
+<li>配置maven配置文件(在maven根目录的)</li>
+</ol>
+</blockquote>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171608.png" style="zoom:50%;" />
+</li>
+<li><p>配置maven-&gt;runner</p>
+<blockquote>
+<p>使用maven框架创建项目时, 一般会要求联网, 配置runner, 在脱机创建新的工程时, 可以在本地找到和使用之前下载下来的插件</p>
+<p>VM Options = -DarchetypeCatalog=internal</p>
+</blockquote>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171636.png" style="zoom:50%;" />
+</li>
+<li><p>修改maven运行环境</p>
+<ul>
+<li>修改Tomcat插件版本</li>
+</ul>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171704.png" style="zoom:50%;" />
+
+<ul>
+<li><p>修改编译所需要的jdk版本</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171720.png" style="zoom:50%;" />
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="依赖作用范围"><a href="#依赖作用范围" class="headerlink" title="依赖作用范围"></a>依赖作用范围</h3><p><img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171740.png" alt=""></p>
+<h3 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h3><ul>
+<li>自己写的Servlet不能被是被识别成Servlet</li>
+</ul>
+<blockquote>
+<p>java.lang.ClassCastException: class com.kim.servlet.MyServlet cannot be cast to class javax.servlet.Servlet (com.kim.servlet.MyServlet is in unnamed module of loader org.apache.catalina.loader.WebappClassLoader @cc9ef8d; javax.servlet.Servlet is in unnamed module of loader org.codehaus.plexus.classworlds.realm.ClassRealm @6ec63f8)<br>    at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1116)</p>
+<p>原因: maven集成Tomcat插件, Tomcat插件中Servlet的包与Maven仓库中的包冲突</p>
+<p>解决方法: 给Servlet相关依赖加上作用域</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171758.png" style="zoom:50%;" />
+</blockquote>
+<ul>
+<li><p>Tomcat启动异常</p>
+<blockquote>
+<p>org.eclipse.jdt.internal.compiler.classfmt.ClassFormatException</p>
+<p>原因: JDK和Tomcat版本不匹配(JDK版本过高/Tomcat版本过低)</p>
+<p>解决办法: 使用更高版本的Tomcat插件, 然后使用mvn tomcat7:run 启动服务器</p>
+<img src="https://raw.githubusercontent.com/jianfengyuan/figurebed/master/img/20200303171816.png" style="zoom:50%;" />
+</blockquote>
+</li>
+<li><p>端口被占用<br>  找到哪个程序占用了该端口</p>
+<blockquote>
+<p>lsof -i tcp:8080</p>
+</blockquote>
+<p>杀死相关进程</p>
+<blockquote>
+<p>kill &lt;pid&gt;</p>
+</blockquote>
+</li>
 </ul>
 
-        </article>
-        
-        <p>
-            <a  class="dashang" onclick="dashangToggle()">赏</a>
-        </p>
-        
-        
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 jaytp@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+<div class="article_copyright">
+    <p><span class="copy-title">文章标题:</span>maven</p>
+    
+    <p><span class="copy-title">本文作者:</span><a  title="John Doe">John Doe</a></p>
+    <p><span class="copy-title">发布时间:</span>2020-03-02, 10:05:51</p>
+    <p><span class="copy-title">最后更新:</span>2020-03-03, 17:18:24</p>
+    <span class="copy-title">原始链接:</span><a class="post-url" href="/2020/03/02/maven/" title="maven">http://yoursite.com/2020/03/02/maven/</a>
+    <p>
+        <span class="copy-title">版权声明:</span><i class="fa fa-creative-commons"></i> <a rel="license noopener" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" title="CC BY-NC-SA 4.0 International" target = "_blank">"署名-非商用-相同方式共享 4.0"</a> 转载请保留原文链接及作者。
+    </p>
+</div>
+
+
+
+
+
+    
+
+
+
+
     </div>
     <div class="copyright">
         <p class="footer-entry">©2016-2019 Yelog</p>
